@@ -1,2 +1,2 @@
-# SJ-Labos
+# SJ-Lab
 Laboratory assignments
