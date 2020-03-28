@@ -1,12 +1,13 @@
 #!/bin/bash
 
-parentFolder=$1
+parent_folder=$1
 extension=$2
 
-echo "First argument: $parentFolder" && echo "Second argument: $extension"
+echo "First argument: $parent_folder" && echo "Second argument: $extension"
 
 lines=0
-for folder in `find $parentFolder -type d`
+folders=`find $parent_folder -type d`
+for folder in $folders
 do
 	temp=0
 	for file in `find $folder -maxdepth 1 -name $extension`

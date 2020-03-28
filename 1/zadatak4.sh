@@ -7,7 +7,7 @@ for file in `ls $src`
 do
 	file="$src/$file"
 	date=`stat -c %y $file | cut -d " " -f 1`
-	folderByMonths="$dest/`date -d $date +%Y-%m`"
-	mkdir -p $folderByMonths
-	mv $file $folderByMonths
+	folder_by_month="$dest/`date -d $date +%Y-%m`"
+	mkdir -p $folder_by_month
+	mv $file $folder_by_month
 done	
