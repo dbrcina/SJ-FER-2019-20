@@ -10,7 +10,7 @@ folders=`find $parent_folder -type d`
 for folder in $folders
 do
 	temp=0
-	for file in `find $folder -maxdepth 1 -name $extension`
+	for file in `find $folder -maxdepth 1 -name "$extension"`
 	do
 		temp=$((temp + `wc -l $file | cut -d " " -f 1`))
 	done
