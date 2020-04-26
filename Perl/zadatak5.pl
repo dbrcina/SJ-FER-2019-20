@@ -9,18 +9,25 @@ if (@ARGV != 1) {
 	die "Program očekuje putanju do datoteke.\n";
 }
 my $file = $ARGV[0];
-my $file_handler;
 
-open $file_handler, '<', $file or die "Greška kod otvaranja '$file' datoteke.\n";
+open FILE, '<', $file or die "Greška kod otvaranja '$file' datoteke.\n";
 
-my $first_line = <$file_handler>;
-chomp $first_line;
-my @percentages = split /;/, $first_line;
-
+my @percentages;
 my %statistics;
 my $longest_key;
-while (defined(my $line = <$file_handler>)) {
+my $first = 1;
+while (defined(my $line = <FILE>)) {
 	chomp $line;
+	# skip comments
+	if ($line =~ /^#./) {
+		next;
+	}
+	# percentages...
+	if ($first) {
+		$first = 0;
+		@percentages = split /;/, $line;
+		next;
+	}
 	my ($jmbag, $prezime, $ime, @rezultati) = split /;/, $line;
 	my $key = "$prezime, $ime ($jmbag)";
 	$longest_key = &max($longest_key, length $key);
@@ -29,12 +36,14 @@ while (defined(my $line = <$file_handler>)) {
 }
 
 my $counter = 1;
+say "Lista po rangu:";
+say "-----------------";
 foreach my $key (sort { $statistics{$b} <=> $statistics{$a} } keys %statistics) {
 	my $spaces = $longest_key - length($key) + 1;
 	printf("%3d. %s%s: %.2f\n", $counter++, $key, " " x $spaces, $statistics{$key});
 }
 
-close $file_handler or die "Greška kod zatvaranja '$file' datoteke.\n";
+close FILE or die "Greška kod zatvaranja '$file' datoteke.\n";
 
 sub calculate_results {
 	my (@results) = @_;

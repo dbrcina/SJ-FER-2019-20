@@ -32,6 +32,8 @@ if ($current_file ne "-") {
 
 sub extract_date_from_name {
 	my ($name) = @_;
+	my @temp = split /\//, $name;
+	$name = $temp[$#temp];
 	return (split('\.', $name))[1];
 }
 
