@@ -11,6 +11,7 @@ def create_matrix(definition):
     data = definition.split('\n')
     rows, columns = (int(d) for d in data[0].split( ))
     for d in data[1:]:
+        if d == '': continue
         row, column, value = d.split( )
         matrix[int(row), int(column)] = float(value)
     return rows, columns, matrix
