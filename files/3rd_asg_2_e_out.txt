@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "zadatak3.py", line 92, in <module>
+    handle_data(args.dir)
+  File "zadatak3.py", line 57, in handle_data
+    load_lab_data(files_dir + '/' + file, lab, group)
+  File "zadatak3.py", line 29, in load_lab_data
+    raise RuntimeWarning("Student found in multiple groups in the same lab!")
+RuntimeWarning: Student found in multiple groups in the same lab!
